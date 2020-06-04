@@ -1,0 +1,24 @@
+datasource db {
+  provider = "postgresql"
+  url = "***"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  email  String  @id
+  tokens Token[]
+  @@map(name: "users")
+}
+
+model Token {
+  id        String   @id
+  access    String
+  confirm   String   @unique
+  createdAt DateTime @default(now())
+  User      User     @relation(fields: [userEmail], references: [email])
+  userEmail String
+  @@map(name: "tokens")
+}
