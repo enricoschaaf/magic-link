@@ -23,6 +23,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       } catch (err) {
         return res.json({ error: {} })
       }
+      console.log("http://localhost:3000/confirm/" + confirm)
       return res.json({ data: { id } })
     }
     return res.status(400).end()

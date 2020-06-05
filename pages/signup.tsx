@@ -1,4 +1,3 @@
-import Auth from "components/Auth"
 import { useAuth } from "hooks/useAuth"
 import Head from "next/head"
 import { useRouter } from "next/router"
@@ -42,12 +41,10 @@ const SignUp = () => {
       <Head>
         <title>Sign up</title>
       </Head>
-      <Auth>
-        <form onSubmit={e => handleSubmit({ e, signUpMutation })}>
-          <input id="email" type="text" placeholder="Email address" />
-          <button type="submit">Sign up</button>
-        </form>
-      </Auth>
+      <form onSubmit={e => handleSubmit({ e, signUpMutation })}>
+        <input id="email" type="text" placeholder="Email address" />
+        <button type="submit">Sign up</button>
+      </form>
     </>
   )
 }
