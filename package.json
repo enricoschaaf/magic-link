@@ -4,7 +4,10 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "generate": "npx prisma generate",
+    "migrate:save": "npx prisma migrate save --experimental",
+    "migrate:up": "npx prisma migrate up --experimental"
   },
   "dependencies": {
     "@prisma/cli": "^2.0.0-beta.8",
@@ -15,8 +18,8 @@
     "next": "^9.4.4",
     "preact": "^10.4.4",
     "preact-render-to-string": "^5.1.9",
-    "react": "github:preact-compat/react#1.0.0",
-    "react-dom": "github:preact-compat/react-dom#1.0.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "react-query": "^1.5.5"
   },
   "devDependencies": {

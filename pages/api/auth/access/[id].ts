@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client"
 import { serialize } from "cookie"
 import { NextApiRequest, NextApiResponse } from "next"
+
 const prisma = new PrismaClient()
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
@@ -9,17 +10,18 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     if (typeof id === "string") {
       const token = await prisma.token.findOne({
         where: { id },
-        select: { access: true, confirmed: true }
+        select: { accessToken: true, confirmed: true }
       })
       if (token) {
         if (token.confirmed) {
           res.setHeader(
             "Set-Cookie",
-            serialize("accessToken", token.access, {
+            serialize("accessToken", token.accessToken, {
               httpOnly: true,
               secure: process.env.NODE_ENV === "production",
               sameSite: "strict",
-              maxAge: 60 * 60 * 24 * 365
+              maxAge: 60 * 60 * 24 * 365,
+              path: "/"
             })
           )
           return res.json({ data: { confirmed: true } })

@@ -1,11 +1,14 @@
+import Auth from "components/Auth"
+import { useAuth } from "hooks/useAuth"
 import Head from "next/head"
 import { useRouter } from "next/router"
 import { useEffect } from "react"
 import { useMutation, useQuery } from "react-query"
+import { getAccessToken } from "utils/getAccessToken"
 
 async function handleSubmit({ e, signInMutation }) {
   e.preventDefault()
-  signInMutation({ email: e.target.email.value })
+  await signInMutation({ email: e.target.email.value })
 }
 
 async function signIn({ email }) {
@@ -18,16 +21,11 @@ async function signIn({ email }) {
   return data
 }
 
-async function getAccessToken(_, id) {
-  const res = await fetch("/api/auth/access/" + id)
-  const { data } = await res.json()
-  return data
-}
-
 const SignIn = () => {
+  useAuth()
   const { push } = useRouter()
   const [signInMutation, { data: signInData }] = useMutation(signIn)
-  const { data } = useQuery(
+  const { data: getAccessTokenData } = useQuery(
     signInData && ["accessToken", signInData.id],
     getAccessToken,
     {
@@ -35,19 +33,21 @@ const SignIn = () => {
     }
   )
   useEffect(() => {
-    if (data?.confirmed) {
+    if (getAccessTokenData?.confirmed) {
       push("/profile")
     }
-  }, [data?.confirmed, push])
+  }, [getAccessTokenData?.confirmed, push])
   return (
     <>
       <Head>
         <title>Sign in</title>
       </Head>
-      <form onSubmit={e => handleSubmit({ e, signInMutation })}>
-        <input id="email" type="text" placeholder="Email address" />
-        <button type="submit">Sign in</button>
-      </form>
+      <Auth>
+        <form onSubmit={e => handleSubmit({ e, signInMutation })}>
+          <input id="email" type="text" placeholder="Email address" />
+          <button type="submit">Sign in</button>
+        </form>
+      </Auth>
     </>
   )
 }

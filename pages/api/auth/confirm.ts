@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client"
 import { NextApiRequest, NextApiResponse } from "next"
+
 const prisma = new PrismaClient()
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
@@ -11,11 +12,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         data: { confirmed: true },
         select: { createdAt: true }
       })
-      if (
-        Date.now() <
-        new Date(createdAt).getUTCMilliseconds() + 1000 * 60 * 10
-      )
-        return res.end()
+      if (Date.now() < createdAt.getTime() + 1000 * 60 * 10) {
+        return res.json({ data: {} })
+      }
+      return res.json({ error: {} })
     }
     return res.status(400).end()
   }

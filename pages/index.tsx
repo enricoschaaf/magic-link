@@ -1,11 +1,17 @@
+import Auth from "components/Auth"
+import Layout from "components/Layout"
 import Head from "next/head"
 
 const Index = () => (
   <>
     <Head>
-      <title>Title</title>  
+      <title>Title</title>
     </Head>
-    <div>Index</div>
+    <Auth>
+      <Layout>
+        <div>Index</div>
+      </Layout>
+    </Auth>
   </>
 )
 
