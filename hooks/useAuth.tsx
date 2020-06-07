@@ -4,7 +4,11 @@ import { queryCache, useQuery } from "react-query"
 import { getUser } from "utils/getUser"
 
 export function useAuth() {
-  const { data } = useQuery(!queryCache.getQueryData("user") && "user", getUser)
+  const { data } = useQuery(
+    !queryCache.getQueryData("user") && "user",
+    getUser,
+    { refetchOnWindowFocus: false }
+  )
   const { push } = useRouter()
   useEffect(() => {
     if (data || queryCache.getQueryData("user")) push("/profile")

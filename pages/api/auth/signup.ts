@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client"
 import { nanoid } from "nanoid"
 import { NextApiRequest, NextApiResponse } from "next"
+import { sendEmail } from "utils/sendEmail"
 
 const prisma = new PrismaClient()
 
@@ -23,7 +24,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       } catch (err) {
         return res.json({ error: {} })
       }
-      console.log("http://localhost:3000/confirm/" + confirm)
+      sendEmail({ link: "http://localhost:3000/confirm/" + confirm, to: email })
       return res.json({ data: { id } })
     }
     return res.status(400).end()

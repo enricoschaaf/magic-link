@@ -1,33 +1,53 @@
 import Link from "next/link"
+import { queryCache, useMutation } from "react-query"
 
-const Layout = ({ children }) => (
-  <>
-    <nav>
-      <ul>
-        <li>
-          <Link href="/">
-            <a>Homepage</a>
-          </Link>
-        </li>
-        <li>
-          <Link href="/signup">
-            <a>Sign up</a>
-          </Link>
-        </li>
-        <li>
-          <Link href="/signin">
-            <a>Sign in</a>
-          </Link>
-        </li>
-        <li>
-          <Link href="/profile">
-            <a>Profile</a>
-          </Link>
-        </li>
-      </ul>
-    </nav>
-    {children}
-  </>
-)
+async function signOut() {
+  const res = await fetch("/api/auth/signout", { method: "POST" })
+  const { data } = await res.json()
+  return data
+}
+
+const Layout = ({ children }) => {
+  const [logOutMutation] = useMutation(signOut)
+  return (
+    <>
+      <nav>
+        <ul>
+          <li>
+            <Link href="/">
+              <a>Homepage</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/signup">
+              <a>Sign up</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/signin">
+              <a>Sign in</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/profile">
+              <a>Profile</a>
+            </Link>
+          </li>
+          <li>
+            <button
+              onClick={async () => {
+                await logOutMutation()
+                queryCache.setQueryData("user", null)
+              }}
+            >
+              Sign out
+            </button>
+          </li>
+        </ul>
+      </nav>
+      {children}
+    </>
+  )
+}
 
 export default Layout

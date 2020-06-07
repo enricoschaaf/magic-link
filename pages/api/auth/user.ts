@@ -8,13 +8,13 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     const { accessToken } = req.cookies
     if (accessToken) {
       if (typeof accessToken === "string") {
-        const {
-          User: { email }
-        } = await prisma.token.findOne({
+        const data = await prisma.token.findOne({
           where: { accessToken },
           select: { User: { select: { email: true } } }
         })
-        return res.json({ data: { email } })
+        if (data?.User) {
+          return res.json({ data: { email: data.User.email } })
+        }
       }
       return res.status(400).end()
     }
