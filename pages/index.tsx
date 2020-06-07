@@ -1,11 +1,9 @@
 import Layout from "components/Layout"
-import Head from "next/head"
+import Title from "components/Title"
 
 const Index = () => (
   <>
-    <Head>
-      <title>Title</title>
-    </Head>
+    <Title />
     <Layout>
       <div>Index</div>
     </Layout>

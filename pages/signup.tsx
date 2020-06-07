@@ -1,5 +1,5 @@
+import Title from "components/Title"
 import { useAuth } from "hooks/useAuth"
-import Head from "next/head"
 import { useRouter } from "next/router"
 import { useEffect } from "react"
 import { useMutation, useQuery } from "react-query"
@@ -38,9 +38,7 @@ const SignUp = () => {
   }, [data?.confirmed, push])
   return (
     <>
-      <Head>
-        <title>Sign up</title>
-      </Head>
+      <Title>Sign up</Title>
       <form onSubmit={e => handleSubmit({ e, signUpMutation })}>
         <input id="email" type="text" placeholder="Email address" />
         <button type="submit">Sign up</button>

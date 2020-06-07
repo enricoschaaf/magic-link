@@ -1,6 +1,6 @@
 import Layout from "components/Layout"
+import Title from "components/Title"
 import { useUser } from "hooks/useUser"
-import Head from "next/head"
 import { useRouter } from "next/router"
 import { useEffect } from "react"
 
@@ -13,7 +13,7 @@ const Profile = () => {
   }, [push, status, user])
   return (
     <>
-      <Head>Profile</Head>
+      <Title>Profile</Title>
       <Layout>
         <span>
           <span>Email: </span>
