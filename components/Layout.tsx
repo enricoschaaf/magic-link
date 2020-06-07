@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { useRouter } from "next/router"
 import { queryCache, useMutation } from "react-query"
 
 async function signOut() {
@@ -8,6 +9,7 @@ async function signOut() {
 }
 
 const Layout = ({ children }) => {
+  const { push } = useRouter()
   const [logOutMutation] = useMutation(signOut)
   return (
     <>
@@ -37,7 +39,9 @@ const Layout = ({ children }) => {
             <button
               onClick={async () => {
                 await logOutMutation()
-                queryCache.setQueryData("user", null)
+                queryCache.removeQueries("user")
+                queryCache.removeQueries("accessToken")
+                push("/")
               }}
             >
               Sign out

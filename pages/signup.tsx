@@ -3,7 +3,7 @@ import { useAuth } from "hooks/useAuth"
 import { useRouter } from "next/router"
 import { useEffect } from "react"
 import { useMutation, useQuery } from "react-query"
-import { getAccessToken } from "utils/getAccessToken"
+import { queryFunction } from "utils/queryFunction"
 
 async function handleSubmit({ e, signUpMutation }) {
   e.preventDefault()
@@ -25,10 +25,11 @@ const SignUp = () => {
   const { push } = useRouter()
   const [signUpMutation, { data: signUpData }] = useMutation(signUp)
   const { data } = useQuery(
-    signUpData && ["accessToken", signUpData.id],
-    getAccessToken,
+    signUpData && ["accessToken", "/api/auth/access/" + signUpData.id],
+    queryFunction,
     {
-      refetchInterval: 500
+      refetchInterval: 500,
+      retry: false
     }
   )
   useEffect(() => {

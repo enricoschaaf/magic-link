@@ -1,3 +1,4 @@
+import Title from "components/Title"
 import { useRouter } from "next/router"
 import { useEffect } from "react"
 import { useMutation } from "react-query"
@@ -23,16 +24,18 @@ const Confirm = () => {
       mutation({ confirm })
     }
   }, [confirm, mutation])
-  if (status === "loading") {
-    return <div>Loading</div>
-  }
-  if (status === "success") {
-    return <div>Success</div>
-  }
-  if (status === "error") {
-    return <div>Error</div>
-  }
-  return null
+  return (
+    <>
+      <Title>Confirm your sign in</Title>
+      {status === "loading" ? (
+        <div>loading</div>
+      ) : status === "error" ? (
+        <div>error</div>
+      ) : (
+        <div>success</div>
+      )}
+    </>
+  )
 }
 
 export default Confirm

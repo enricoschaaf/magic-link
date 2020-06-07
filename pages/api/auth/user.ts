@@ -16,9 +16,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           return res.json({ data: { email: data.User.email } })
         }
       }
-      return res.status(400).end()
     }
-    return res.json({ error: {} })
+    return res.status(400).end()
   }
   return res.status(405).end()
 }

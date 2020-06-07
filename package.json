@@ -11,8 +11,10 @@
     "migrate:up": "prisma migrate up --experimental"
   },
   "dependencies": {
+    "-": "0.0.1",
     "@prisma/client": "^2.0.0-beta.8",
     "@sendgrid/mail": "^7.1.1",
+    "D": "^1.0.0",
     "cookie": "^0.4.1",
     "nanoid": "^3.1.9",
     "next": "^9.4.4",
@@ -20,8 +22,9 @@
     "preact-render-to-string": "^5.1.9",
     "react": "github:preact-compat/react#1.0.0",
     "react-dom": "github:preact-compat/react-dom#1.0.0",
-    "react-ssr-prepass": "npm:preact-ssr-prepass@^1.0.1",
-    "react-query": "^1.5.5"
+    "react-query": "^1.5.5",
+    "react-query-devtools": "^1.1.17",
+    "react-ssr-prepass": "npm:preact-ssr-prepass@^1.0.1"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^9.4.4",

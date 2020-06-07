@@ -1,16 +1,20 @@
 import Layout from "components/Layout"
 import Title from "components/Title"
-import { useUser } from "hooks/useUser"
 import { useRouter } from "next/router"
 import { useEffect } from "react"
+import { useQuery } from "react-query"
+import { queryFunction } from "utils/queryFunction"
 
 const Profile = () => {
-  const { user, status } = useUser()
+  const { data: user, status } = useQuery(
+    ["user", "/api/auth/user"],
+    queryFunction,
+    { retry: false }
+  )
   const { push } = useRouter()
   useEffect(() => {
-    console.log({ status, user })
-    if (status === "success" && !user) push("/signin")
-  }, [push, status, user])
+    if (status === "error") push("/signin")
+  }, [push, status])
   return (
     <>
       <Title>Profile</Title>

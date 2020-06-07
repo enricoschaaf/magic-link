@@ -15,7 +15,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       if (Date.now() < createdAt.getTime() + 1000 * 60 * 10) {
         return res.json({ data: {} })
       }
-      return res.json({ error: {} })
     }
     return res.status(400).end()
   }
