@@ -1,10 +1,11 @@
 {
-  "name": "passwordless-auth",
+  "name": "magic-link",
   "version": "1.0.0",
   "scripts": {
     "dev": "next",
     "build": "next build",
     "start": "next start",
+    "postinstall": "prisma generate",
     "generate": "prisma generate",
     "migrate:save": "prisma migrate save --experimental",
     "migrate:up": "prisma migrate up --experimental"
@@ -17,8 +18,9 @@
     "next": "^9.4.4",
     "preact": "^10.4.4",
     "preact-render-to-string": "^5.1.9",
-    "react": "0.0.0-experimental-33c3af284",
-    "react-dom": "0.0.0-experimental-33c3af284",
+    "react": "github:preact-compat/react#1.0.0",
+    "react-dom": "github:preact-compat/react-dom#1.0.0",
+    "react-ssr-prepass": "npm:preact-ssr-prepass@^1.0.1",
     "react-query": "^1.5.5"
   },
   "devDependencies": {

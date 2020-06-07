@@ -8,6 +8,7 @@ const Profile = () => {
   const { user, status } = useUser()
   const { push } = useRouter()
   useEffect(() => {
+    console.log({ status, user })
     if (status === "success" && !user) push("/signin")
   }, [push, status, user])
   return (

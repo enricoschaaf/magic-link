@@ -24,7 +24,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       } catch (err) {
         return res.json({ error: {} })
       }
-      sendEmail({ link: "http://localhost:3000/confirm/" + confirm, to: email })
+      await sendEmail({
+        link: "https://magic-link.enricoschaaf.com/confirm/" + confirm,
+        to: email
+      })
       return res.json({ data: { id } })
     }
     return res.status(400).end()
