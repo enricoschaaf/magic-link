@@ -45,7 +45,7 @@ const Layout = ({ children }) => {
           </li>
         </ul>
       </nav>
-      {children}
+      <main>{children}</main>
     </>
   )
 }
