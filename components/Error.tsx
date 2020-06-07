@@ -1,10 +1,13 @@
 import Head from "next/head"
+import Title from "./Title"
 
 const Error = ({ statusCode }: { statusCode: number }) => (
   <>
-    <Head>
-      <title>{statusCode} | Page not found</title>
-    </Head>
+    {statusCode === 404 && (
+      <Head>
+        <Title>Page not found</Title>
+      </Head>
+    )}
     <div className="h-full flex justify-center items-center px-4 sm:px-6 lg:px-8">
       <span className="text-gray-600 text-center">
         <h1 className="text-4xl font-black">{statusCode}</h1>
