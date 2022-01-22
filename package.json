@@ -16,7 +16,7 @@
     "@sendgrid/mail": "^7.1.1",
     "D": "^1.0.0",
     "cookie": "^0.4.1",
-    "nanoid": "^3.1.9",
+    "nanoid": "^3.1.31",
     "next": "^9.4.4",
     "preact": "^10.4.4",
     "preact-render-to-string": "^5.1.9",
